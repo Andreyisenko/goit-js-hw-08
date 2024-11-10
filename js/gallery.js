@@ -66,20 +66,34 @@ const images = [
 const gallery = document.querySelector('.gallery');
 const newGalery = images
   .map(
-    item => `<li class="gallery-item">
-  <a class="gallery-link" href="${item.preview}}">
+    ({ preview, original, description }) => `<li class="gallery-item">
+  <a class="gallery-link" href="${original}}">
     <img
       class="gallery-image"
-      src="${item.preview}"
-      data-source="href="${item.original}""
-      alt="${item.description}"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
     />
   </a>
   </li>`
   )
   .join('');
 
-// console.log(gallery);
 gallery.insertAdjacentHTML('afterbegin', newGalery);
-const imageItem = document.querySelectorAll('img');
-console.log(imageItem);
+
+gallery.addEventListener('click', handleClick);
+
+function handleClick(event) {
+  if (!event.target.classList.contains('gallery-image')) {
+    return;
+  }
+  console.log(event.target.dataset.source);
+  event.preventDefault();
+  const currentProduct = event.target.closest('.gallery-image');
+  const dataS = currentProduct.dataset.source;
+  const instance = basicLightbox.create(`
+  <img src="${dataS}" alt="${currentProduct.alt}"width="800" height="600">
+${event.target.alt}`);
+
+  instance.show();
+}

@@ -20,4 +20,13 @@
   display: block;
   max-width: 100%;
   height: auto;
+  transition: transform 250ms ease-in-out;
+}
+
+.gallery-image:hover,
+.gallery-image:focus {
+  transform: scale(1.05);
+}
+.title {
+  color: #fff;
 }
