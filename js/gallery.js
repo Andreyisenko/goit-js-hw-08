@@ -97,3 +97,32 @@ ${event.target.alt}`);
 
   instance.show();
 }
+localStorage.setItem('one', 'locc');
+// console.log(localStorage.getItem('one'));
+const arr = [1, 2, 3, 4];
+const setLocak = JSON.stringify(arr);
+// console.log(setLocak);
+// console.log(arr);
+localStorage.setItem('arrlocal', setLocak);
+localStorage.getItem('arrlocal');
+// console.log(localStorage.getItem('arrlocal'));
+// console.log(localStorage.getItem('arrloca'));
+// localStorage.clear();
+localStorage.removeItem('arrlocal');
+
+const form = document.querySelector('.feedback-form');
+
+const localKey = 'exemple';
+const textarea = form.elements.message;
+textarea.value = localStorage.getItem(localKey) ?? '';
+
+form.addEventListener('input', evt => {
+  localStorage.setItem(localKey, evt.target.value);
+});
+
+form.addEventListener('submit', evt => {
+  evt.preventDefault();
+  localStorage.removeItem(localKey);
+  console.log(evt.target.elements.message.value);
+  form.reset();
+});
